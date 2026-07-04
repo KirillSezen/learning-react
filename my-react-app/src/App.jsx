@@ -2,6 +2,7 @@ import './app.css'
 import Header from './Header'
 import Footer from './Footer'
 import Card from './Card'
+import ColorPicker from './ColorPicker'
 
 function App() {
 
@@ -15,6 +16,8 @@ function App() {
       <Card name='Nikita' age={21} topic={'Driving the truck'} showAge={true}/>
       <Card name='Vadim' age={22} topic={'Writing samp bots'} showAge={false}/>
     </div>
+
+    <ColorPicker/>
     
     <Footer/>
 

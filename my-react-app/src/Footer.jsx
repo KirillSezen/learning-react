@@ -2,18 +2,21 @@ import {useState} from 'react'
 
 function Footer() {
 
-	const [number, setNumber] = useState(0);
+const [number, setNumber] = useState({id:1, num: 0});
 
 	const increase = () => {
-		setNumber(number + 1)
+		setNumber(n => ({...n, num: n.num + 1}))
+		setNumber(n => ({...n, num: n.num + 1}))
 	}
 
 	const reset = () => {
-		setNumber(0)
+				setNumber(n => ({...n, num: 0}))
+
 	}
 	
 	const decrease = () => {
-		setNumber(number - 1)
+		setNumber(n => ({...n, num: n.num - 1}))
+		setNumber(n => ({...n, num: n.num - 1}))	
 	}
 	
 	
@@ -22,7 +25,7 @@ function Footer() {
 			<p className="text-xl font-medium italic">&copy; {new Date().getFullYear()} Hello, world! website</p>
 			
 			<div className='bg-amber-400 w-fit h-full '>
-				<h1 className='text-4xl text-center'>{number}</h1>
+				<h1 className='text-4xl text-center'>{number.num}</h1>
 				<button className='text-2xl mx-1 p-1' onClick={increase}>+</button>
 				<button className='text-2xl mx-1 p-1' onClick={reset}>reset</button>
 				<button className='text-2xl mx-1 p-1' onClick={decrease}>-</button>

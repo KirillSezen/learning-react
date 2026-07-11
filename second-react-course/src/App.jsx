@@ -1,22 +1,32 @@
 import { useState } from "react"
+import Counter from "./components/counter"
+import PostItem from "./components/PostItem"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [inputValue, setInputValue] = useState('')
+  const [posts, setPosts] = useState([
+    {id:1, title:'Java Script', body:'JS description'},
+    {id:1, title:'Java Script', body:'JS description'},
+    {id:1, title:'Java Script', body:'JS description'},
+    {id:1, title:'Java Script', body:'JS description'},
+  ])
 
   return (
     <div className="flex flex-col ">
 
-      <h1 className="text-4xl font-medium text-center my-10">Counter: {count}</h1>
+       <Counter/>
 
-      <div className="flex flex-row justify-around">
+      <h1 className="mx-10 mt-10 text-3xl text-black">Вы ввели: {inputValue}</h1>
 
-        <button onClick={() => setCount(count + 1)} className="p-2 border-none bg-teal-400 rounded-full w-20 h-auto font-medium text-4xl">+</button>
+       <input className="p-2 m-10 bg-gray-200 w-fit border-teal-500 border-2 rounded-2xl" type="text" value={inputValue} placeholder="Write something: " onChange={event => setInputValue(event.target.value)}/>
 
-        <button onClick={() => setCount(0)} className="p-4 border-none bg-teal-400 rounded-full w-fit h-auto font-medium text-4xl">reset</button>
+        
+      
+        <PostItem post={{id:1, title:'Java Script', body:'JS description'}}/>
+        <PostItem post={{id:1, title:'Java Script', body:'JS description'}}/>
+        <PostItem post={{id:1, title:'Java Script', body:'JS description'}}/>
+        <PostItem post={{id:1, title:'Java Script', body:'JS description'}}/>
 
-        <button onClick={() => setCount(count - 1)} className="p-2 border-none bg-teal-400 rounded-full w-20 h-auto font-medium text-4xl">-</button>
-
-      </div>
     </div>
     
   )

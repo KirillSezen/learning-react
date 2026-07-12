@@ -3,6 +3,12 @@ import PostItem from "./PostItem"
 
 const PostList = ({title, posts, remove}) => {
 
+	if(!posts.length) {
+		return (
+			<h1 className="my-10 text-center text-3xl font -bold">Пока что, посты отсутствуют</h1>
+		)
+	}
+
 	return(
 		<div>
 			<h1 className="text-4xl text-center my-5">{title}</h1>

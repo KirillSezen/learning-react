@@ -2,7 +2,6 @@ import { useState } from "react"
 
 const Input = () => {
 	const [inputValue, setInputValue] = useState('')
-	
 
 	return(
 		<div>

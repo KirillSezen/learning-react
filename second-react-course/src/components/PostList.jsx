@@ -1,7 +1,8 @@
 import PostItem from "./PostItem"
 
 
-const PostList = ({title, posts}) => {
+const PostList = ({title, posts, remove}) => {
+
 	return(
 		<div>
 			<h1 className="text-4xl text-center my-5">{title}</h1>
@@ -9,7 +10,7 @@ const PostList = ({title, posts}) => {
 			<div>
         <ul>
           {posts.map((post) => (
-          <li key={post.id}><PostItem post={post}/></li>
+          <li key={post.id}><PostItem remove={remove} post={post}/></li>
         ))}
         </ul>
       </div>

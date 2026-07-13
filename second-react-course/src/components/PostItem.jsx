@@ -1,6 +1,6 @@
 import React from "react"
 
-export const PostItem = React.forwardRef(({post, remove, id, title, body}, ref) => {
+export const PostItem = React.forwardRef(({post, remove, title, body}, ref) => {
 
 	return (
 		<div ref={ref}>
@@ -9,7 +9,7 @@ export const PostItem = React.forwardRef(({post, remove, id, title, body}, ref) 
 
       	<div className="post-content flex flex-col items-start pl-2">
 
-					<h1 className="text-white font-medium text-2xl">{id}. {title}</h1>
+					<h1 className="text-white font-medium text-2xl">{post.id}. {title}</h1>
 
 					<p className="text-white  text-xs">{body}</p>
 

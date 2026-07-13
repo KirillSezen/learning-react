@@ -15,12 +15,12 @@ const PostList = ({title, posts, remove}) => {
 			<h1 className="text-4xl text-center my-5">{title}</h1>
 
 			<TransitionGroup>
-          {posts.map((post, index) => {
+          {posts.map((post) => {
 						const itemRef = createRef()
 
 						return (
 							<CSSTransition nodeRef={itemRef} key={post.id} timeout={500} classNames='post'>
-							<div ref={itemRef}><PostItem remove={remove} post={post} ref={itemRef} id={index + 1} title={post.title} body={post.body}/></div>
+							<div ref={itemRef}><PostItem remove={remove} post={post} ref={itemRef} title={post.title} body={post.body}/></div>
 							</CSSTransition>
 						)
 					})}

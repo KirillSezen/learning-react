@@ -7,18 +7,28 @@ import PostFilter from "./components/PostFilter"
 import { usePosts } from "./hooks/usePosts"
 import PostService from "./API/PostService"
 import Spinner from "./UI/Spinner"
-import { useFetching } from "./hooks/useFetchung"
+import { useFetching } from "./hooks/useFetching"
+import { getPagesCount, getPagesArray } from "./utils/pages"
+import Pagination from "./UI/Pagination"
 
 function App() {
   const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({sort: '', query: ''})
+  const [totalPages, setTotalPages] = useState(0)
+  const [limit, setLimit] = useState(10)
+  const [page, setPage] = useState(1)
 
   const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
-    const posts = await PostService.getAll()
-    setPosts(posts)
+    const response = await PostService.getAll(limit, page)
+    setPosts(response.data)
+
+    const totalCount = response.headers['x-total-count']
+    setTotalPages(getPagesCount(totalCount, limit))
   })
 
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
+
+
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -28,9 +38,13 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
+  const changePage = (page) => {
+    setPage(page)
+  }
+
   useEffect(() => {
     fetchPosts()
-  }, [])
+  }, [page])
 
 
   return (
@@ -39,6 +53,8 @@ function App() {
       <Counter/>
 
       <Input/>
+
+      <PostForm create={createPost}/>
 
       <PostFilter filter={filter} setFilter={setFilter}/>
       
@@ -50,8 +66,8 @@ function App() {
       :
       <PostList remove={removePost} title='Список постов 1' posts={sortedAndSearchedPosts}/>
       }
-              
-      <PostForm create={createPost}/>
+
+      <Pagination totalPages={totalPages} changePage={changePage}/>
 
     </div>
     

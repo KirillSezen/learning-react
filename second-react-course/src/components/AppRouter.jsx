@@ -1,24 +1,39 @@
 import { Routes, Route, Navigate} from 'react-router'
 import { publicRoutes, privateRoutes } from '../router'
+import Navbar from '../UI/Navbar'
+import { useContext } from 'react'
+import { AuthContext } from '../context'
+import Spinner from '../UI/Spinner'
 
 const AppRouter = () => {
-	const isAuth = true
+	const { isAuth, isLoading } = useContext(AuthContext)
+
+	if(isLoading) {
+		<Spinner/>
+	}
 
 	return (
-
 		<div>
-			<Routes>
+			{isAuth && <Navbar/>}
+
 				{isAuth ?
-					privateRoutes.map(route => 
-						<Route path={route.path} Component={route.component}/>
-					)
+					<Routes>
+						{privateRoutes.map(route => 
+						<Route path={route.path} Component={route.component} key={route.path}/>
+					)}
+
+					<Route path='*' element={<Navigate to='/' replace/>}/>
+					</Routes>
 					:
-					publicRoutes.map(route => 
-						<Route path={route.path} Component={route.component}/>
-					)   
+					<Routes>
+						{publicRoutes.map(route => 
+						<Route path={route.path} Component={route.component} key={route.path}/>
+						)}
+
+					 <Route path='*' element={<Navigate to='/login' replace/>}/>
+					</Routes>
 				}
-					 <Route path='*' element={<Navigate to='/' replace/>}/>
-      </Routes>
+					
 		</div>
 	)
 }

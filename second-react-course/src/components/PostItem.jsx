@@ -1,6 +1,9 @@
 import React from "react"
+import { useNavigate } from 'react-router'
 
 export const PostItem = React.forwardRef(({post, remove, title, body}, ref) => {
+
+	const router = useNavigate()
 
 	return (
 		<div ref={ref}>
@@ -15,7 +18,12 @@ export const PostItem = React.forwardRef(({post, remove, title, body}, ref) => {
 
         </div>
 
-        <button onClick={() => remove(post)} className="pr-5 text-xl text-white cursor-pointer">Удалить</button>
+				<div className="flex flex-col sm:flex-row justify-center gap-5">
+					<button onClick={() => router(`/posts/${post.id}`)} className="pr-5 text-xl text-white cursor-pointer">Открыть</button>
+
+
+        	<button onClick={() => remove(post)} className="pr-5 text-xl text-white cursor-pointer">Удалить</button>
+				</div>
 
       </div>
 
